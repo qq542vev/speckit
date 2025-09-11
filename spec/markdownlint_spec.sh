@@ -30,7 +30,7 @@ eval "$(shellspec - -c) exit 1"
 
 set -f
 
-Describe '*.mdファイルの検証'
+Describe '*.mdファイルの検証' sskit category:markdown
 	markdownlint_test() (
 		# shellcheck disable=SC2016
 		code='
@@ -41,7 +41,7 @@ Describe '*.mdファイルの検証'
 		IFS="${SSKIT_IFS-${IFS}}"
 
 		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '?*.md' -type f -exec sh -fc "${code}" sh '{}' +
+		find . ${SSKIT_FIND_ARGS-} '(' -name '?*.md' -o  -name '?*.markdown' ')' -type f -exec sh -fc "${code}" sh '{}' +
 	)
 
 	Example 'markdownlint *.md'

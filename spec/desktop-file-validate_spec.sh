@@ -30,7 +30,7 @@ eval "$(shellspec - -c) exit 1"
 
 set -f
 
-Describe 'Test: *.desktop'
+Describe 'Test: *.desktop' sskit category:desktop
 	desktopfilevalidate_test() (
 		# shellcheck disable=SC2016
 		code='

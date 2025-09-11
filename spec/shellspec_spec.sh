@@ -30,7 +30,7 @@ eval "$(shellspec - -c) exit 1"
 
 set -f
 
-Describe '*_spec.shの検証'
+Describe '*_spec.shの検証' sskit category:shellspec
 	shellspec_test() (
 		# shellcheck disable=SC2016
 		code='

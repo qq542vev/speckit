@@ -30,7 +30,7 @@ eval "$(shellspec - -c) exit 1"
 
 set -f
 
-Describe 'Test: *.html, *xhtml'
+Describe 'Test: *.html, *xhtml' sskit category:html
 	tidy_test() {
 		# shellcheck disable=SC2016
 		code='

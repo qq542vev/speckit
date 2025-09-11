@@ -30,19 +30,19 @@ eval "$(shellspec - -c) exit 1"
 
 set -f
 
-Describe '.gitの検証'
+Describe '.gitの検証' sskit category:git
 	git_test() (
 		# shellcheck disable=SC2016
 		code='
 			IFS="${SSKIT_IFS-${IFS}}"
 
 			for dir in "${@}"; do
-				out=$(GIT_DIR="${dir}" git ${SSKIT_GIT_ARGS-} '"${*}"' 2>&1) || rs="${rs-${?}}"
+				out=$(GIT_DIR="${dir}" git ${SSKIT_GIT_ARGS-} '"${*}"' 2>&1) || exit="${exit-${?}}"
 
 				[ -n "${out}" ] && printf "=== %s ===\\n%s\\n" "${dir}" "${out}" >&2
 			done
 
-			exit "${rs-0}"
+			exit "${exit-0}"
 		'
 		IFS="${SSKIT_IFS-${IFS}}"
 

@@ -30,7 +30,7 @@ eval "$(shellspec - -c) exit 0"
 
 set -f
 
-Describe '*.cssファイルの検証'
+Describe '*.cssファイルの検証' sskit category:css
 	stylelint_test() (
 		# shellcheck disable=SC2016
 		code='

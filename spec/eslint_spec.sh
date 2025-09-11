@@ -30,7 +30,7 @@ eval "$(shellspec - -c) exit 1"
 
 set -f
 
-Describe '*.mdファイルの検証'
+Describe '*.jsファイルの検証' sskit category:javascript
 	eslint_test() (
 		# shellcheck disable=SC2016
 		code='
