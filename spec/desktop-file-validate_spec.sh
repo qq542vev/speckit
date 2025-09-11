@@ -1,38 +1,51 @@
 #!/usr/bin/env sh
 
-### File: desktop_spec.sh
+### File: desktop-file-validate_spec.sh
 ##
-## *.desktopファイルの検証。
+## desktop-file-validateによる*.desktopファイルの検証。
 ##
 ## Usage:
 ##
 ## ------ Text ------
-## shellspec desktop_spec.sh
+## shellspec desktop-file-validate_spec.sh
 ## ------------------
 ##
 ## Metadata:
 ##
-##   id - dee2247c-befe-4670-a5ef-a603e7f52319
+##   id - 74502681-fffb-4891-ae9e-e5c368d3797e
 ##   author - <qq542vev at https://purl.org/meta/me/>
 ##   version - 1.0.0
 ##   created - 2025-06-03
-##   modified - 2025-06-03
+##   modified - 2025-09-09
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
 ##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-3.0.txt>
-##   depends - desktop-file-validate
+##   depends - find, desktop-file-validate
 ##
 ## See Also:
 ##
-##   * <Project homepage at https://github.com/qq542vev/bookmarklet-generator>
-##   * <Bag report at https://github.com/qq542vev/bookmarklet-generator>
+##   * <Project homepage at https://github.com/qq542vev/sslk>
+##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
 eval "$(shellspec - -c) exit 1"
 
-Describe '*.desktopファイルの検証'
-	Parameters:value 'BookmarkletGenerator.desktop'
+set -f
 
-	Example "desktop-file-validate -- '${1}'"
-		When call desktop-file-validate -- "${1}"
+Describe 'Test: *.desktop'
+	desktopfilevalidate_test() (
+		# shellcheck disable=SC2016
+		code='
+			IFS="${SSKIT_IFS-${IFS}}"
+
+			desktop-file-validate ${SSKIT_DESKTOPFILEVALIDATE_ARGS-} -- "${@}"
+		'
+		IFS="${SSKIT_IFS-${IFS}}"
+
+		# shellcheck disable=SC2086
+		find . ${SSKIT_FIND_ARGS-} -name '?*.desktop' -type f -exec sh -fc "${code}" sh '{}' +
+	)
+
+	Example 'desktop-file-validate *.desktop'
+		When call desktopfilevalidate_test
 		The status should eq 0
 	End
 End

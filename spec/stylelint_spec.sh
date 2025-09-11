@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-### File: css_spec.sh
+### File: stylelint_spec.sh
 ##
-## *.cssファイルの検証。
+## stylelintによる*.cssファイルの検証。
 ##
 ## Usage:
 ##
@@ -12,28 +12,40 @@
 ##
 ## Metadata:
 ##
-##   id - e9d3c523-04b5-438f-8854-7a1d79d31844
+##   id - 1cb8f4cf-9e20-4e71-ac40-d94c1f4eedfb
 ##   author - <qq542vev at https://purl.org/meta/me/>
 ##   version - 1.0.0
 ##   created - 2025-06-02
-##   modified - 2025-06-02
+##   modified - 2025-09-10
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
-##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-3.0.txt>
+##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-4.0.txt>
 ##   depends - find, npx, stylelint
 ##
 ## See Also:
 ##
-##   * <Project homepage at https://github.com/qq542vev/bookmarklet-generator>
-##   * <Bag report at https://github.com/qq542vev/bookmarklet-generator>
+##   * <Project homepage at https://github.com/qq542vev/sslk>
+##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
-eval "$(shellspec - -c) exit 1"
+eval "$(shellspec - -c) exit 0"
+
+set -f
 
 Describe '*.cssファイルの検証'
-	# shellcheck disable=SC2046
-	Parameters:value $(find src -name '*.css' -type f)
+	stylelint_test() (
+		# shellcheck disable=SC2016
+		code='
+			IFS="${SSKIT_IFS-${IFS}}"
 
-	Example "stylelint -- '${1}'"
-		When call npx stylelint -- "${1}"
+			npx stylelint ${SSKIT_STYLELINT_ARGS-} -- "${@}"
+		'
+		IFS="${SSKIT_IFS-${IFS}}"
+
+		# shellcheck disable=SC2086
+		find . ${SSKIT_FIND_ARGS-} -name '?*.md' -type f -exec sh -fc "${code}" sh '{}' +
+	)
+
+	Example 'stylelint *.css'
+		When call stylelint_test
 		The status should eq 0
 	End
 End

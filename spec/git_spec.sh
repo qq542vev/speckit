@@ -2,7 +2,7 @@
 
 ### File: git_spec.sh
 ##
-## .gitの検証。
+## gitによる.gitディレクトリの検証。
 ##
 ## Usage:
 ##
@@ -12,35 +12,56 @@
 ##
 ## Metadata:
 ##
-##   id - 9eba3d2a-6f03-473a-8f21-2051f39e6b6b
+##   id - fadc04a2-13e3-43cc-9546-510d304440f1
 ##   author - <qq542vev at https://purl.org/meta/me/>
 ##   version - 1.0.0
 ##   created - 2025-06-03
-##   modified - 2025-06-03
+##   modified - 2025-09-11
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
 ##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-3.0.txt>
-##   depends - git
+##   depends - find, git
 ##
 ## See Also:
 ##
-##   * <Project homepage at https://github.com/qq542vev/bookmarklet-generator>
-##   * <Bag report at https://github.com/qq542vev/bookmarklet-generator>
+##   * <Project homepage at https://github.com/qq542vev/sslk>
+##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
 eval "$(shellspec - -c) exit 1"
 
+set -f
+
 Describe '.gitの検証'
+	git_test() (
+		# shellcheck disable=SC2016
+		code='
+			IFS="${SSKIT_IFS-${IFS}}"
+
+			for dir in "${@}"; do
+				out=$(GIT_DIR="${dir}" git ${SSKIT_GIT_ARGS-} '"${*}"' 2>&1) || rs="${rs-${?}}"
+
+				[ -n "${out}" ] && printf "=== %s ===\\n%s\\n" "${dir}" "${out}" >&2
+			done
+
+			exit "${rs-0}"
+		'
+		IFS="${SSKIT_IFS-${IFS}}"
+
+		# shellcheck disable=SC2086
+		find . ${SSKIT_FIND_ARGS-} -name '.git' -type d -prune -exec sh -fc "${code}" sh '{}' +
+	)
+    
 	Example 'git diff --cached --check'
-		When call git diff --cached --check
+		When call git_test diff --cached --check
 		The status should eq 0
 	End
 
 	Example 'git commit-graph verify'
-		When call git commit-graph verify
+		When call git_test commit-graph verify
 		The status should eq 0
 	End
 
 	Example 'git fsck --full --strict'
-		When call git fsck --full --strict
+		When call git_test fsck --full --strict --no-progress
 		The status should eq 0
 	End
 End
