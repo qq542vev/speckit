@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 1"
 
-set -f
-
 Describe 'Test: *.sh' sskit category:shellscript
+	Set 'noglob:on'
+
 	shellcheck_test() (
 		# shellcheck disable=SC2016
 		code='

@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 1"
 
-set -f
-
 Describe 'Test: *.html, *xhtml' sskit category:html
+	Set 'noglob:on'
+
 	tidy_test() {
 		# shellcheck disable=SC2016
 		code='

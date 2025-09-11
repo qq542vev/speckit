@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 0"
 
-set -f
-
 Describe '*.cssファイルの検証' sskit category:css
+	Set 'noglob:on'
+
 	stylelint_test() (
 		# shellcheck disable=SC2016
 		code='
@@ -41,7 +41,7 @@ Describe '*.cssファイルの検証' sskit category:css
 		IFS="${SSKIT_IFS-${IFS}}"
 
 		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '?*.md' -type f -exec sh -fc "${code}" sh '{}' +
+		find . ${SSKIT_FIND_ARGS-} -name '?*.css' -type f -exec sh -fc "${code}" sh '{}' +
 	)
 
 	Example 'stylelint *.css'

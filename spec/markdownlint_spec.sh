@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 1"
 
-set -f
-
 Describe '*.mdファイルの検証' sskit category:markdown
+	Set 'noglob:on'
+
 	markdownlint_test() (
 		# shellcheck disable=SC2016
 		code='

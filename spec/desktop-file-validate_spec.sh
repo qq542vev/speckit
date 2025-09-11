@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 1"
 
-set -f
-
 Describe 'Test: *.desktop' sskit category:desktop
+	Set 'noglob:on'
+
 	desktopfilevalidate_test() (
 		# shellcheck disable=SC2016
 		code='

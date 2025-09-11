@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 1"
 
-set -f
-
 Describe '.gitの検証' sskit category:git
+	Set 'noglob:on'
+
 	git_test() (
 		# shellcheck disable=SC2016
 		code='

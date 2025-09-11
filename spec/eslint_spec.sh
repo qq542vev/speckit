@@ -28,9 +28,9 @@
 
 eval "$(shellspec - -c) exit 1"
 
-set -f
-
 Describe '*.jsファイルの検証' sskit category:javascript
+	Set 'noglob:on'
+
 	eslint_test() (
 		# shellcheck disable=SC2016
 		code='
