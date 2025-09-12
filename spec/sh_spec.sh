@@ -31,13 +31,15 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe 'Test: *.sh' sskit category:shellscript
-	Skip if 'not exists sh' sskit_not_exists_all sh
+	if [ -z "${SSKIT_SH_CMD+_}" ]; then
+		Skip if 'not exists sh' sskit_not_exists_all sh
+	fi
 
 	sh_test() {
 		# shellcheck disable=SC2016
 		sskit_find_file '
 			for file in "${@}"; do
-				sh -n ${SSKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
+				${SSKIT_SH_CMD:-sh} -n ${SSKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
 			done
 
 			exit "${exit-0}"

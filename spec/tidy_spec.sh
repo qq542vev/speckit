@@ -31,11 +31,13 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe 'Test: *.html, *xhtml' sskit category:html
-	Skip if 'not exists tidy' sskit_not_exists_all tidy
+	if [ -z "${SSKIT_TIDY_CMD+_}" ]; then
+		Skip if 'not exists tidy' sskit_not_exists_all tidy
+	fi
 
 	tidy_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'tidy -eq --show-filename yes ${SSKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
+		sskit_find_file '${SSKIT_TIDY_CMD:-tidy} -eq --show-filename yes ${SSKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
 	Example "tidy -eq -- *.html *.xhtml"

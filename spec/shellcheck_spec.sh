@@ -31,11 +31,13 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe 'Test: *.sh' sskit category:shellscript
-	Skip if 'not exists shellcheck' sskit_not_exists_all shellcheck
+	if [ -z "${SSKIT_SHELLCHECK_CMD+_}" ]; then
+		Skip if 'not exists shellcheck' sskit_not_exists_all shellcheck
+	fi
 
 	shellcheck_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'shellcheck -f gcc -s sh ${SSKIT_SHELLCHECK_ARGS-} -- "${@}"' '?*.sh'
+		sskit_find_file '${SSKIT_SHELLCHECK_CMD:-shellcheck} -f gcc -s sh ${SSKIT_SHELLCHECK_ARGS-} -- "${@}"' '?*.sh'
 	}
 
 	Example 'shellcheck *.sh'

@@ -31,11 +31,13 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe 'eslint' sskit category:javascript
-	Skip if 'not exists npx' sskit_not_exists_all npx
+	if [ -z "${SSKIT_ESLINT_CMD+_}" ]; then
+		Skip if 'not exists eslint' sskit_not_exists_all eslint
+	fi
 
 	eslint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'npx ${SSKIT_NPX_ARGS-} eslint ${SSKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
+		sskit_find_file '${SSKIT_ESLINT_CMD:-eslint} ${SSKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
 	}
 
 	Example '*.js *.cjs *.mjs'

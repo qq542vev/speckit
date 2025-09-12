@@ -31,9 +31,13 @@ eval "$(shellspec - -c) exit 0"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe '*.cssファイルの検証' sskit category:css
+	if [ -z "${SSKIT_STYLELINT_CMD+_}" ]; then
+		Skip if 'not exists stylelint' sskit_not_exists_all stylelint
+	fi
+
 	stylelint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'npx ${SSKIT_NPX_ARGS-} stylelint ${SSKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
+		sskit_find_file '${SSKIT_STYLELINT_CMD:-stylelint} ${SSKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
 	}
 
 	Example 'stylelint *.css'

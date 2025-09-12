@@ -31,11 +31,13 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe '*.mdファイルの検証' sskit category:markdown
-	Skip if 'not exists npx' sskit_not_exists_all npx
+	if [ -z "${SSKIT_MARKDOWNLINT_CMD+_}" ]; then
+		Skip if 'not exists markdownlint' sskit_not_exists_all markdownlint
+	fi
 
 	markdownlint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'npx ${SSKIT_NPX_ARGS-} markdownlint ${SSKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
+		sskit_find_file '${SSKIT_MARKDOWNLINT_CMD:-markdownlint} ${SSKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
 	}
 
 	Example 'markdownlint *.md'

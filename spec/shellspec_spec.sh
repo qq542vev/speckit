@@ -31,11 +31,13 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe '*_spec.shの検証' sskit category:shellspec
-	Skip if 'not exists shellspec' sskit_not_exists_all shellspec
+	if [ -z "${SSKIT_SHELLSPEC_CMD+_}" ]; then
+		Skip if 'not exists shellspec' sskit_not_exists_all shellspec
+	fi
 
 	shellspec_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'shellspec --syntax-check ${SSKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
+		sskit_find_file '${SSKIT_SHELLSPEC_CMD:-shellspec} --syntax-check ${SSKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
 	}
 
 	Example 'shellspec --syntax-check *_spec.sh'

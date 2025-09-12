@@ -31,11 +31,13 @@ eval "$(shellspec - -c) exit 1"
 Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
 Describe 'Test: *.desktop' sskit category:desktop
-	Skip if 'not exists desktop-file-validate' sskit_not_exists_all desktop-file-validate
+	if [ -z "${SSKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
+		Skip if 'not exists desktop-file-validate' sskit_not_exists_all desktop-file-validate
+	fi
 
 	desktopfilevalidate_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'desktop-file-validate ${SSKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
+		sskit_find_file '${SSKIT_DESKTOP_FILE_VALIDATE_CMD:-desktop-file-validate} ${SSKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
 	}
 
 	Example 'desktop-file-validate *.desktop'
