@@ -35,7 +35,7 @@ Describe 'Test: *.desktop' sskit category:desktop
 
 	desktopfilevalidate_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file 'desktop-file-validate ${SSKIT_DESKTOPFILEVALIDATE_ARGS-} -- "${@}"' '?*.desktop'
+		sskit_find_file 'desktop-file-validate ${SSKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
 	}
 
 	Example 'desktop-file-validate *.desktop'
