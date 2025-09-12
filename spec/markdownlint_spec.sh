@@ -28,24 +28,18 @@
 
 eval "$(shellspec - -c) exit 1"
 
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+
 Describe '*.mdファイルの検証' sskit category:markdown
-	Set 'noglob:on'
+	Skip if 'not exists npx' sskit_not_exists_all npx
 
-	markdownlint_test() (
+	markdownlint_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
-
-			npx markdownlint ${SSKIT_MARKDOWNLINT_ARGS-} -- "${@}"
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
-
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} '(' -name '?*.md' -o  -name '?*.markdown' ')' -type f -exec sh -fc "${code}" sh '{}' +
-	)
+		sskit_find_file 'npx ${SSKIT_NPX_ARGS-} markdownlint ${SSKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
+	}
 
 	Example 'markdownlint *.md'
-		When call markdownlint_test
+		When call markdownlint_test 
 		The status should eq 0
 	End
 End

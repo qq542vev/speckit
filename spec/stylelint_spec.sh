@@ -28,21 +28,13 @@
 
 eval "$(shellspec - -c) exit 0"
 
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+
 Describe '*.cssファイルの検証' sskit category:css
-	Set 'noglob:on'
-
-	stylelint_test() (
+	stylelint_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
-
-			npx stylelint ${SSKIT_STYLELINT_ARGS-} -- "${@}"
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
-
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '?*.css' -type f -exec sh -fc "${code}" sh '{}' +
-	)
+		sskit_find_file 'npx ${SSKIT_NPX_ARGS-} stylelint ${SSKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
+	}
 
 	Example 'stylelint *.css'
 		When call stylelint_test

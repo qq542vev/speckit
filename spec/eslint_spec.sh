@@ -28,24 +28,18 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Describe '*.jsファイルの検証' sskit category:javascript
-	Set 'noglob:on'
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
 
-	eslint_test() (
+Describe 'eslint' sskit category:javascript
+	Skip if 'not exists npx' sskit_not_exists_all npx
+
+	eslint_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
+		sskit_find_file 'npx ${SSKIT_NPX_ARGS-} eslint ${SSKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
+	}
 
-			npx eslint ${SSKIT_ESLINT_ARGS-} -- "${@}"
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
-
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} '(' -name '?*.js' -o -name '?*.[cm]js' ')' -type f -exec sh -fc "${code}" sh '{}' +
-	)
-
-	Example 'eslint *.js *.cjs *.mjs'
+	Example '*.js *.cjs *.mjs'
 		When call eslint_test
-		The status should eq 0
+		The status should eq 1
 	End
 End

@@ -28,21 +28,15 @@
 
 eval "$(shellspec - -c) exit 1"
 
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+
 Describe '*_spec.shの検証' sskit category:shellspec
-	Set 'noglob:on'
+	Skip if 'not exists shellspec' sskit_not_exists_all shellspec
 
-	shellspec_test() (
+	shellspec_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
-
-			shellspec --syntax-check ${SSKIT_MARKDOWNLINT_ARGS-} -- "${@}" >/dev/null
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
-
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '?*_spec.sh' -type f -exec sh -fc "${code}" sh '{}' +
-	)
+		sskit_find_file 'shellspec --syntax-check ${SSKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
+	}
 
 	Example 'shellspec --syntax-check *_spec.sh'
 		When call shellspec_test

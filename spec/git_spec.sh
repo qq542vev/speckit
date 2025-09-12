@@ -28,14 +28,14 @@
 
 eval "$(shellspec - -c) exit 1"
 
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+
 Describe '.gitの検証' sskit category:git
-	Set 'noglob:on'
+	Skip if 'not exists git' sskit_not_exists_all git
 
-	git_test() (
+	git_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
-
+		sskit_find_dir '
 			for dir in "${@}"; do
 				out=$(GIT_DIR="${dir}" git ${SSKIT_GIT_ARGS-} '"${*}"' 2>&1) || exit="${exit-${?}}"
 
@@ -43,12 +43,8 @@ Describe '.gitの検証' sskit category:git
 			done
 
 			exit "${exit-0}"
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
-
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '.git' -type d -prune -exec sh -fc "${code}" sh '{}' +
-	)
+		' '.git'
+	}
     
 	Example 'git diff --cached --check'
 		When call git_test diff --cached --check

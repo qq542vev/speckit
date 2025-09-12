@@ -28,27 +28,23 @@
 
 eval "$(shellspec - -c) exit 1"
 
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+
 Describe 'Test: *.sh' sskit category:shellscript
-	Set 'noglob:on'
+	Skip if 'not exists sh' sskit_not_exists_all sh
 
-	sh_test() (
+	sh_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
-
+		sskit_find_file '
 			for file in "${@}"; do
 				sh -n ${SSKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
 			done
 
 			exit "${exit-0}"
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
+		' '?*.sh'
+	}
 
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '?*.sh' -type f -exec sh -fc "${code}" sh '{}' +
-	)
-
-	Example "sh -n -- '${1}'"
+	Example 'sh -n *.sh'
 		When call sh_test
 		The status should eq 0
 	End

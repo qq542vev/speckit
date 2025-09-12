@@ -28,21 +28,15 @@
 
 eval "$(shellspec - -c) exit 1"
 
+Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+
 Describe 'Test: *.desktop' sskit category:desktop
-	Set 'noglob:on'
+	Skip if 'not exists desktop-file-validate' sskit_not_exists_all desktop-file-validate
 
-	desktopfilevalidate_test() (
+	desktopfilevalidate_test() {
 		# shellcheck disable=SC2016
-		code='
-			IFS="${SSKIT_IFS-${IFS}}"
-
-			desktop-file-validate ${SSKIT_DESKTOPFILEVALIDATE_ARGS-} -- "${@}"
-		'
-		IFS="${SSKIT_IFS-${IFS}}"
-
-		# shellcheck disable=SC2086
-		find . ${SSKIT_FIND_ARGS-} -name '?*.desktop' -type f -exec sh -fc "${code}" sh '{}' +
-	)
+		sskit_find_file 'desktop-file-validate ${SSKIT_DESKTOPFILEVALIDATE_ARGS-} -- "${@}"' '?*.desktop'
+	}
 
 	Example 'desktop-file-validate *.desktop'
 		When call desktopfilevalidate_test
