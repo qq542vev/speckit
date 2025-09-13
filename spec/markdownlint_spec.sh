@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe '*.mdファイルの検証' sskit category:markdown
-	if [ -z "${SSKIT_MARKDOWNLINT_CMD+_}" ]; then
-		Skip if 'not exists markdownlint' sskit_not_exists_all markdownlint
+Describe '*.mdファイルの検証' sslkit category:markdown
+	if [ -z "${SSLKIT_MARKDOWNLINT_CMD+_}" ]; then
+		Skip if 'not exists markdownlint' sslkit_not_exists_all markdownlint
 	fi
 
 	markdownlint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_MARKDOWNLINT_CMD:-markdownlint} ${SSKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
+		sslkit_find_file '${SSLKIT_MARKDOWNLINT_CMD:-markdownlint} ${SSLKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
 	}
 
 	Example 'markdownlint *.md'

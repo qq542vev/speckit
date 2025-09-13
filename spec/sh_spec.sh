@@ -28,18 +28,18 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe 'Test: *.sh' sskit category:shellscript
-	if [ -z "${SSKIT_SH_CMD+_}" ]; then
-		Skip if 'not exists sh' sskit_not_exists_all sh
+Describe 'Test: *.sh' sslkit category:shellscript
+	if [ -z "${SSLKIT_SH_CMD+_}" ]; then
+		Skip if 'not exists sh' sslkit_not_exists_all sh
 	fi
 
 	sh_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '
+		sslkit_find_file '
 			for file in "${@}"; do
-				${SSKIT_SH_CMD:-sh} -n ${SSKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
+				${SSLKIT_SH_CMD:-sh} -n ${SSLKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
 			done
 
 			exit "${exit-0}"

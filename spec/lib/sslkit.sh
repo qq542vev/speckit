@@ -1,13 +1,13 @@
 #!/usr/bin/env sh
 
-### File: sskit.sh
+### File: sslkit.sh
 ##
 ## 関数セットのファイル。
 ##
 ## Usage:
 ##
 ## ------ Text ------
-## Include sskit.sh
+## Include sslkit.sh
 ## ------------------
 ##
 ## Metadata:
@@ -25,36 +25,36 @@
 ##   * <Project homepage at https://github.com/qq542vev/sslk>
 ##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
-sskit_find() (
+sslkit_find() (
 	# shellcheck disable=SC2016
-	code='IFS=${SSKIT_IFS-${IFS}};'"${1}"
+	code='IFS=${SSLKIT_IFS-${IFS}};'"${1}"
 	shift
 	set -f
-	IFS="${SSKIT_IFS-${IFS}}"
+	IFS="${SSLKIT_IFS-${IFS}}"
 
 	# shellcheck disable=SC2086
-	find . ${SSKIT_FIND_ARGS-} "${@}" -exec sh -fc "${code}" sh '{}' +
+	find . ${SSLKIT_FIND_ARGS-} "${@}" -exec sh -fc "${code}" sh '{}' +
 )
 
-sskit_find_file() {
-	sskit_find_file__code="${1}"
+sslkit_find_file() {
+	sslkit_find_file__code="${1}"
 	shift
 
-	eval "set -- $(sskit_find_name "${@}")"
+	eval "set -- $(sslkit_find_name "${@}")"
 
-	sskit_find "${sskit_find_file__code}" "${@}" -type f
+	sslkit_find "${sslkit_find_file__code}" "${@}" -type f
 }
 
-sskit_find_dir() {
-	sskit_find_dir__code="${1}"
+sslkit_find_dir() {
+	sslkit_find_dir__code="${1}"
 	shift
 
-	eval "set -- $(sskit_find_name "${@}")"
+	eval "set -- $(sslkit_find_name "${@}")"
 
-	sskit_find "${sskit_find_dir__code}" "${@}" -type d
+	sslkit_find "${sslkit_find_dir__code}" "${@}" -type d
 }
 
-sskit_find_name() {
+sslkit_find_name() {
 	if [ "${#}" -ne 0 ]; then
 		printf "'(' -name '%s'" "${1}"
 		shift
@@ -67,7 +67,7 @@ sskit_find_name() {
 	fi
 }
 
-sskit_exists_cmd() {
+sslkit_exists_cmd() {
 	set -- "$(command -v "${1}"; printf '_')"
 	set -- "${1%?_}"
 
@@ -76,16 +76,16 @@ sskit_exists_cmd() {
 	fi
 }
 
-sskit_not_exists_all() {
+sslkit_not_exists_all() {
 	while [ "${#}" -ne 0 ]; do
-		! sskit_exists_cmd "${1}" || return 1
+		! sslkit_exists_cmd "${1}" || return 1
 		shift
 	done
 }
 
-sskit_not_exists_any() {
+sslkit_not_exists_any() {
 	while [ "${#}" -ne 0 ]; do
-		sskit_exists_cmd "${1}" || return 0
+		sslkit_exists_cmd "${1}" || return 0
 		shift
 	done
 

@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe 'Test: *.desktop' sskit category:desktop
-	if [ -z "${SSKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
-		Skip if 'not exists desktop-file-validate' sskit_not_exists_all desktop-file-validate
+Describe 'Test: *.desktop' sslkit category:desktop
+	if [ -z "${SSLKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
+		Skip if 'not exists desktop-file-validate' sslkit_not_exists_all desktop-file-validate
 	fi
 
 	desktopfilevalidate_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_DESKTOP_FILE_VALIDATE_CMD:-desktop-file-validate} ${SSKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
+		sslkit_find_file '${SSLKIT_DESKTOP_FILE_VALIDATE_CMD:-desktop-file-validate} ${SSLKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
 	}
 
 	Example 'desktop-file-validate *.desktop'

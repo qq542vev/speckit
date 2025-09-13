@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe 'Test: *.sh' sskit category:shellscript
-	if [ -z "${SSKIT_SHELLCHECK_CMD+_}" ]; then
-		Skip if 'not exists shellcheck' sskit_not_exists_all shellcheck
+Describe 'Test: *.sh' sslkit category:shellscript
+	if [ -z "${SSLKIT_SHELLCHECK_CMD+_}" ]; then
+		Skip if 'not exists shellcheck' sslkit_not_exists_all shellcheck
 	fi
 
 	shellcheck_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_SHELLCHECK_CMD:-shellcheck} -f gcc -s sh ${SSKIT_SHELLCHECK_ARGS-} -- "${@}"' '?*.sh'
+		sslkit_find_file '${SSLKIT_SHELLCHECK_CMD:-shellcheck} -f gcc -s sh ${SSLKIT_SHELLCHECK_ARGS-} -- "${@}"' '?*.sh'
 	}
 
 	Example 'shellcheck *.sh'

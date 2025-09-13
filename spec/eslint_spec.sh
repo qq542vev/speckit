@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe 'eslint' sskit category:javascript
-	if [ -z "${SSKIT_ESLINT_CMD+_}" ]; then
-		Skip if 'not exists eslint' sskit_not_exists_all eslint
+Describe 'eslint' sslkit category:javascript
+	if [ -z "${SSLKIT_ESLINT_CMD+_}" ]; then
+		Skip if 'not exists eslint' sslkit_not_exists_all eslint
 	fi
 
 	eslint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_ESLINT_CMD:-eslint} ${SSKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
+		sslkit_find_file '${SSLKIT_ESLINT_CMD:-eslint} ${SSLKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
 	}
 
 	Example '*.js *.cjs *.mjs'

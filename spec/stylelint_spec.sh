@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 0"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe '*.cssファイルの検証' sskit category:css
-	if [ -z "${SSKIT_STYLELINT_CMD+_}" ]; then
-		Skip if 'not exists stylelint' sskit_not_exists_all stylelint
+Describe '*.cssファイルの検証' sslkit category:css
+	if [ -z "${SSLKIT_STYLELINT_CMD+_}" ]; then
+		Skip if 'not exists stylelint' sslkit_not_exists_all stylelint
 	fi
 
 	stylelint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_STYLELINT_CMD:-stylelint} ${SSKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
+		sslkit_find_file '${SSLKIT_STYLELINT_CMD:-stylelint} ${SSLKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
 	}
 
 	Example 'stylelint *.css'

@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe 'Test: *.html, *xhtml' sskit category:html
-	if [ -z "${SSKIT_MARKUPLINLT_CMD+_}" ]; then
-		Skip if 'not exists markuplint' sskit_not_exists_all markuplint
+Describe 'Test: *.html, *xhtml' sslkit category:html
+	if [ -z "${SSLKIT_MARKUPLINLT_CMD+_}" ]; then
+		Skip if 'not exists markuplint' sslkit_not_exists_all markuplint
 	fi
 
 	markuplint_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_MARKUPLINLT_CMD:-markuplint} ${SSKIT_MARKUPLINLT_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
+		sslkit_find_file '${SSLKIT_MARKUPLINLT_CMD:-markuplint} ${SSLKIT_MARKUPLINLT_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
 	Example "markuplint *.html *.xhtml"

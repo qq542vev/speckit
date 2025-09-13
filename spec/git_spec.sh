@@ -28,18 +28,18 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe '.gitの検証' sskit category:git
-	if [ -z "${SSKIT_GIT_CMD+_}" ]; then
-		Skip if 'not exists git' sskit_not_exists_all git
+Describe '.gitの検証' sslkit category:git
+	if [ -z "${SSLKIT_GIT_CMD+_}" ]; then
+		Skip if 'not exists git' sslkit_not_exists_all git
 	fi
 
 	git_test() {
 		# shellcheck disable=SC2016
-		sskit_find_dir '
+		sslkit_find_dir '
 			for dir in "${@}"; do
-				out=$(GIT_DIR="${dir}" ${SSKIT_GIT_CMD:-git} ${SSKIT_GIT_ARGS-} '"${*}"' 2>&1) || exit="${exit-${?}}"
+				out=$(GIT_DIR="${dir}" ${SSLKIT_GIT_CMD:-git} ${SSLKIT_GIT_ARGS-} '"${*}"' 2>&1) || exit="${exit-${?}}"
 
 				[ -n "${out}" ] && printf "=== %s ===\\n%s\\n" "${dir}" "${out}" >&2
 			done

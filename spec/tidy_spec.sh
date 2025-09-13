@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe 'Test: *.html, *xhtml' sskit category:html
-	if [ -z "${SSKIT_TIDY_CMD+_}" ]; then
-		Skip if 'not exists tidy' sskit_not_exists_all tidy
+Describe 'Test: *.html, *xhtml' sslkit category:html
+	if [ -z "${SSLKIT_TIDY_CMD+_}" ]; then
+		Skip if 'not exists tidy' sslkit_not_exists_all tidy
 	fi
 
 	tidy_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_TIDY_CMD:-tidy} -eq --show-filename yes ${SSKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
+		sslkit_find_file '${SSLKIT_TIDY_CMD:-tidy} -eq --show-filename yes ${SSLKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
 	Example "tidy -eq -- *.html *.xhtml"

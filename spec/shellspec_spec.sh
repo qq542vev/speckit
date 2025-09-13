@@ -28,16 +28,16 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
 
-Describe '*_spec.shの検証' sskit category:shellspec
-	if [ -z "${SSKIT_SHELLSPEC_CMD+_}" ]; then
-		Skip if 'not exists shellspec' sskit_not_exists_all shellspec
+Describe '*_spec.shの検証' sslkit category:shellspec
+	if [ -z "${SSLKIT_SHELLSPEC_CMD+_}" ]; then
+		Skip if 'not exists shellspec' sslkit_not_exists_all shellspec
 	fi
 
 	shellspec_test() {
 		# shellcheck disable=SC2016
-		sskit_find_file '${SSKIT_SHELLSPEC_CMD:-shellspec} --syntax-check ${SSKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
+		sslkit_find_file '${SSLKIT_SHELLSPEC_CMD:-shellspec} --syntax-check ${SSLKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
 	}
 
 	Example 'shellspec --syntax-check *_spec.sh'
