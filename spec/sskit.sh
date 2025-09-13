@@ -1,5 +1,30 @@
 #!/usr/bin/env sh
 
+### File: sskit.sh
+##
+## 関数セットのファイル。
+##
+## Usage:
+##
+## ------ Text ------
+## Include sskit.sh
+## ------------------
+##
+## Metadata:
+##
+##   id - 28e2faed-9430-43e2-a266-5f0a1a473463
+##   author - <qq542vev at https://purl.org/meta/me/>
+##   version - 1.0.0
+##   created - 2025-09-12
+##   modified - 2025-09-14
+##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
+##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-3.0.txt>
+##
+## See Also:
+##
+##   * <Project homepage at https://github.com/qq542vev/sslk>
+##   * <Bag report at https://github.com/qq542vev/sslk/issues>
+
 sskit_find() (
 	# shellcheck disable=SC2016
 	code='IFS=${SSKIT_IFS-${IFS}};'"${1}"
