@@ -42,9 +42,27 @@ sskit_find_name() {
 	fi
 }
 
+sskit_exists_cmd() {
+	set -- "$(command -v "${1}"; printf '_')"
+	set -- "${1%?_}"
+
+	if ! [ -f "${1}" ] || ! [ -x "${1}" ]; then
+		return 1
+	fi
+}
+
 sskit_not_exists_all() {
 	while [ "${#}" -ne 0 ]; do
-		type "${1}" >/dev/null 2>&1 && return 1
+		! sskit_exists_cmd "${1}" || return 1
 		shift
 	done
+}
+
+sskit_not_exists_any() {
+	while [ "${#}" -ne 0 ]; do
+		sskit_exists_cmd "${1}" || return 0
+		shift
+	done
+
+	return 1
 }
