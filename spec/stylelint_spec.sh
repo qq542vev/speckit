@@ -28,7 +28,7 @@
 
 eval "$(shellspec - -c) exit 0"
 
-Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
 
 Describe '*.cssファイルの検証' sskit category:css
 	if [ -z "${SSKIT_STYLELINT_CMD+_}" ]; then

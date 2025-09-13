@@ -28,7 +28,7 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
 
 Describe 'eslint' sskit category:javascript
 	if [ -z "${SSKIT_ESLINT_CMD+_}" ]; then

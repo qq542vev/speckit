@@ -28,7 +28,7 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
 
 Describe '*.mdファイルの検証' sskit category:markdown
 	if [ -z "${SSKIT_MARKDOWNLINT_CMD+_}" ]; then

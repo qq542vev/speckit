@@ -28,7 +28,7 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
 
 Describe 'Test: *.html, *xhtml' sskit category:html
 	if [ -z "${SSKIT_MARKUPLINLT_CMD+_}" ]; then

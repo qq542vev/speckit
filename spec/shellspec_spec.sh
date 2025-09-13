@@ -28,7 +28,7 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
 
 Describe '*_spec.shの検証' sskit category:shellspec
 	if [ -z "${SSKIT_SHELLSPEC_CMD+_}" ]; then

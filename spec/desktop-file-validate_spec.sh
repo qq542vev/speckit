@@ -28,7 +28,7 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/sskit.sh"
+Include "${SHELLSPEC_HELPERDIR}/lib/sskit.sh"
 
 Describe 'Test: *.desktop' sskit category:desktop
 	if [ -z "${SSKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
