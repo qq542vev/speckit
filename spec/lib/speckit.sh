@@ -71,7 +71,7 @@ speckit_find_name() {
 }
 
 speckit_exists_cmd() {
-	set -- "$(command -v "${1}"; printf '_')"
+	set -- "$(sh -c 'command -v "${1}"; printf _' sh "${1}")"
 	set -- "${1%?_}"
 
 	if ! [ -f "${1}" ] || ! [ -x "${1}" ]; then
