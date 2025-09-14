@@ -36,7 +36,7 @@ sslkit_find() (
 	IFS="${SSLKIT_IFS-${IFS}}"
 
 	# shellcheck disable=SC2086
-	find . ${SSLKIT_FIND_ARGS-} "${@}" -exec sh -fc "${code}" sh '{}' +
+	${SSLKIT_FIND_CMD:-find} . ${SSLKIT_FIND_ARGS-} "${@}" -exec sh -fc "${code}" sh '{}' +
 )
 
 sslkit_find_file() {
