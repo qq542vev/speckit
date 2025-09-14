@@ -28,7 +28,13 @@
 
 eval "$(shellspec - -c) exit 1"
 
-Include "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh"
+for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
+	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+
+	if [ -f "${inc}" ]; then
+		Include "${inc}"
+	fi
+done
 
 Describe '*.mdファイルの検証' sslkit category:markdown
 	if [ -z "${SSLKIT_MARKDOWNLINT_CMD+_}" ]; then

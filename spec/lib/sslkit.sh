@@ -25,6 +25,9 @@
 ##   * <Project homepage at https://github.com/qq542vev/sslk>
 ##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
+# shellcheck disable=SC2034
+readonly SSLKIT_MODULE_LOADED=1
+
 sslkit_find() (
 	# shellcheck disable=SC2016
 	code='IFS=${SSLKIT_IFS-${IFS}};'"${1}"
