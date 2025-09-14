@@ -28,24 +28,24 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe '.gitの検証' sslkit category:git
-	if [ -z "${SSLKIT_GIT_CMD+_}" ]; then
-		Skip if 'not exists git' sslkit_not_exists_all git
+Describe '.gitの検証' speckit category:git
+	if [ -z "${SPECKIT_GIT_CMD+_}" ]; then
+		Skip if 'not exists git' speckit_not_exists_all git
 	fi
 
 	git_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_dir '
+		speckit_find_dir '
 			for dir in "${@}"; do
-				out=$(GIT_DIR="${dir}" ${SSLKIT_GIT_CMD:-git} ${SSLKIT_GIT_ARGS-} '"${*}"' 2>&1) || exit="${exit-${?}}"
+				out=$(GIT_DIR="${dir}" ${SPECKIT_GIT_CMD:-git} ${SPECKIT_GIT_ARGS-} '"${*}"' 2>&1) || exit="${exit-${?}}"
 
 				[ -n "${out}" ] && printf "=== %s ===\\n%s\\n" "${dir}" "${out}" >&2
 			done

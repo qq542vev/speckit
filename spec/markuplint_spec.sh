@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe 'Test: *.html, *xhtml' sslkit category:html
-	if [ -z "${SSLKIT_MARKUPLINLT_CMD+_}" ]; then
-		Skip if 'not exists markuplint' sslkit_not_exists_all markuplint
+Describe 'Test: *.html, *xhtml' speckit category:html
+	if [ -z "${SPECKIT_MARKUPLINLT_CMD+_}" ]; then
+		Skip if 'not exists markuplint' speckit_not_exists_all markuplint
 	fi
 
 	markuplint_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_MARKUPLINLT_CMD:-markuplint} ${SSLKIT_MARKUPLINLT_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
+		speckit_find_file '${SPECKIT_MARKUPLINLT_CMD:-markuplint} ${SPECKIT_MARKUPLINLT_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
 	Example "markuplint *.html *.xhtml"

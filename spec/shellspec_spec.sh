@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe '*_spec.shの検証' sslkit category:shellspec
-	if [ -z "${SSLKIT_SHELLSPEC_CMD+_}" ]; then
-		Skip if 'not exists shellspec' sslkit_not_exists_all shellspec
+Describe '*_spec.shの検証' speckit category:shellspec
+	if [ -z "${SPECKIT_SHELLSPEC_CMD+_}" ]; then
+		Skip if 'not exists shellspec' speckit_not_exists_all shellspec
 	fi
 
 	shellspec_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_SHELLSPEC_CMD:-shellspec} --syntax-check ${SSLKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
+		speckit_find_file '${SPECKIT_SHELLSPEC_CMD:-shellspec} --syntax-check ${SPECKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
 	}
 
 	Example 'shellspec --syntax-check *_spec.sh'

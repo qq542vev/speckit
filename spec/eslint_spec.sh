@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe 'eslint' sslkit category:javascript
-	if [ -z "${SSLKIT_ESLINT_CMD+_}" ]; then
-		Skip if 'not exists eslint' sslkit_not_exists_all eslint
+Describe 'eslint' speckit category:javascript
+	if [ -z "${SPECKIT_ESLINT_CMD+_}" ]; then
+		Skip if 'not exists eslint' speckit_not_exists_all eslint
 	fi
 
 	eslint_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_ESLINT_CMD:-eslint} ${SSLKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
+		speckit_find_file '${SPECKIT_ESLINT_CMD:-eslint} ${SPECKIT_ESLINT_ARGS-} -- "${@}"' '?*.js' '?*.[cm]js'
 	}
 
 	Example '*.js *.cjs *.mjs'

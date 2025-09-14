@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe 'Test: *.desktop' sslkit category:desktop
-	if [ -z "${SSLKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
-		Skip if 'not exists desktop-file-validate' sslkit_not_exists_all desktop-file-validate
+Describe 'Test: *.desktop' speckit category:desktop
+	if [ -z "${SPECKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
+		Skip if 'not exists desktop-file-validate' speckit_not_exists_all desktop-file-validate
 	fi
 
 	desktopfilevalidate_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_DESKTOP_FILE_VALIDATE_CMD:-desktop-file-validate} ${SSLKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
+		speckit_find_file '${SPECKIT_DESKTOP_FILE_VALIDATE_CMD:-desktop-file-validate} ${SPECKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
 	}
 
 	Example 'desktop-file-validate *.desktop'

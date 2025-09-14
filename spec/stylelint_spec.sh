@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 0"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe '*.cssファイルの検証' sslkit category:css
-	if [ -z "${SSLKIT_STYLELINT_CMD+_}" ]; then
-		Skip if 'not exists stylelint' sslkit_not_exists_all stylelint
+Describe '*.cssファイルの検証' speckit category:css
+	if [ -z "${SPECKIT_STYLELINT_CMD+_}" ]; then
+		Skip if 'not exists stylelint' speckit_not_exists_all stylelint
 	fi
 
 	stylelint_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_STYLELINT_CMD:-stylelint} ${SSLKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
+		speckit_find_file '${SPECKIT_STYLELINT_CMD:-stylelint} ${SPECKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
 	}
 
 	Example 'stylelint *.css'

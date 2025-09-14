@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe 'Test: *.html, *xhtml' sslkit category:html
-	if [ -z "${SSLKIT_TIDY_CMD+_}" ]; then
-		Skip if 'not exists tidy' sslkit_not_exists_all tidy
+Describe 'Test: *.html, *xhtml' speckit category:html
+	if [ -z "${SPECKIT_TIDY_CMD+_}" ]; then
+		Skip if 'not exists tidy' speckit_not_exists_all tidy
 	fi
 
 	tidy_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_TIDY_CMD:-tidy} -eq --show-filename yes ${SSLKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
+		speckit_find_file '${SPECKIT_TIDY_CMD:-tidy} -eq --show-filename yes ${SPECKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
 	Example "tidy -eq -- *.html *.xhtml"

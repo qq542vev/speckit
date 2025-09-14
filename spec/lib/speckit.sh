@@ -1,13 +1,13 @@
 #!/usr/bin/env sh
 
-### File: sslkit.sh
+### File: speckit.sh
 ##
 ## 関数セットのファイル。
 ##
 ## Usage:
 ##
 ## ------ Text ------
-## Include sslkit.sh
+## Include speckit.sh
 ## ------------------
 ##
 ## Metadata:
@@ -26,38 +26,38 @@
 ##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
 # shellcheck disable=SC2034
-readonly SSLKIT_MODULE_LOADED=1
+readonly SPECKIT_MODULE_LOADED=1
 
-sslkit_find() (
+speckit_find() (
 	# shellcheck disable=SC2016
-	code='IFS=${SSLKIT_IFS-${IFS}};'"${1}"
+	code='IFS=${SPECKIT_IFS-${IFS}};'"${1}"
 	shift
 	set -f
-	IFS="${SSLKIT_IFS-${IFS}}"
+	IFS="${SPECKIT_IFS-${IFS}}"
 
 	# shellcheck disable=SC2086
-	${SSLKIT_FIND_CMD:-find} . ${SSLKIT_FIND_ARGS-} "${@}" -exec sh -fc "${code}" sh '{}' +
+	${SPECKIT_FIND_CMD:-find} . ${SPECKIT_FIND_ARGS-} "${@}" -exec sh -fc "${code}" sh '{}' +
 )
 
-sslkit_find_file() {
-	sslkit_find_file__code="${1}"
+speckit_find_file() {
+	speckit_find_file__code="${1}"
 	shift
 
-	eval "set -- $(sslkit_find_name "${@}")"
+	eval "set -- $(speckit_find_name "${@}")"
 
-	sslkit_find "${sslkit_find_file__code}" "${@}" -type f
+	speckit_find "${speckit_find_file__code}" "${@}" -type f
 }
 
-sslkit_find_dir() {
-	sslkit_find_dir__code="${1}"
+speckit_find_dir() {
+	speckit_find_dir__code="${1}"
 	shift
 
-	eval "set -- $(sslkit_find_name "${@}")"
+	eval "set -- $(speckit_find_name "${@}")"
 
-	sslkit_find "${sslkit_find_dir__code}" "${@}" -type d
+	speckit_find "${speckit_find_dir__code}" "${@}" -type d
 }
 
-sslkit_find_name() {
+speckit_find_name() {
 	if [ "${#}" -ne 0 ]; then
 		printf "'(' -name '%s'" "${1}"
 		shift
@@ -70,7 +70,7 @@ sslkit_find_name() {
 	fi
 }
 
-sslkit_exists_cmd() {
+speckit_exists_cmd() {
 	set -- "$(command -v "${1}"; printf '_')"
 	set -- "${1%?_}"
 
@@ -79,16 +79,16 @@ sslkit_exists_cmd() {
 	fi
 }
 
-sslkit_not_exists_all() {
+speckit_not_exists_all() {
 	while [ "${#}" -ne 0 ]; do
-		! sslkit_exists_cmd "${1}" || return 1
+		! speckit_exists_cmd "${1}" || return 1
 		shift
 	done
 }
 
-sslkit_not_exists_any() {
+speckit_not_exists_any() {
 	while [ "${#}" -ne 0 ]; do
-		sslkit_exists_cmd "${1}" || return 0
+		speckit_exists_cmd "${1}" || return 0
 		shift
 	done
 

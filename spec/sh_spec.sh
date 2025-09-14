@@ -28,24 +28,24 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe 'Test: *.sh' sslkit category:shellscript
-	if [ -z "${SSLKIT_SH_CMD+_}" ]; then
-		Skip if 'not exists sh' sslkit_not_exists_all sh
+Describe 'Test: *.sh' speckit category:shellscript
+	if [ -z "${SPECKIT_SH_CMD+_}" ]; then
+		Skip if 'not exists sh' speckit_not_exists_all sh
 	fi
 
 	sh_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '
+		speckit_find_file '
 			for file in "${@}"; do
-				${SSLKIT_SH_CMD:-sh} -n ${SSLKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
+				${SPECKIT_SH_CMD:-sh} -n ${SPECKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
 			done
 
 			exit "${exit-0}"

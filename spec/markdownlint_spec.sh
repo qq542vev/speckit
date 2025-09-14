@@ -28,22 +28,22 @@
 
 eval "$(shellspec - -c) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/sslkit.sh" "${SHELLSPEC_SPECFILE}/../lib/sslkit.sh"; do
-	[ -n "${SSLKIT_MODULE_LODAD+_}" ] && break
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+	[ -n "${SPECKIT_MODULE_LODAD+_}" ] && break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
 	fi
 done
 
-Describe '*.mdファイルの検証' sslkit category:markdown
-	if [ -z "${SSLKIT_MARKDOWNLINT_CMD+_}" ]; then
-		Skip if 'not exists markdownlint' sslkit_not_exists_all markdownlint
+Describe '*.mdファイルの検証' speckit category:markdown
+	if [ -z "${SPECKIT_MARKDOWNLINT_CMD+_}" ]; then
+		Skip if 'not exists markdownlint' speckit_not_exists_all markdownlint
 	fi
 
 	markdownlint_test() {
 		# shellcheck disable=SC2016
-		sslkit_find_file '${SSLKIT_MARKDOWNLINT_CMD:-markdownlint} ${SSLKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
+		speckit_find_file '${SPECKIT_MARKDOWNLINT_CMD:-markdownlint} ${SPECKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
 	}
 
 	Example 'markdownlint *.md'
