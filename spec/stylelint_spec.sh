@@ -19,7 +19,7 @@
 ##   modified - 2025-09-10
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
 ##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-4.0.txt>
-##   depends - find, npx, stylelint
+##   depends - stylelint
 ##
 ## See Also:
 ##
