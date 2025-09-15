@@ -1,1 +1,2 @@
 --no-warning-as-failure
+--env SPECKIT_FIND_ARGS="! -path ./deps/*"
