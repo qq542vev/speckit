@@ -1,0 +1,9 @@
+{
+	"name": "speckit",
+	"version": "0.1.0",
+	"description": "様々な検証ツールをShellSpecから利用するためのツール。",
+	"global": false,
+	"dependencies-dev": {
+		"shellspec/shellspec": "0.28.1"
+	}
+}
