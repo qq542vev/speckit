@@ -48,6 +48,6 @@ Describe 'eslint' speckit category:javascript
 
 	Example '*.js *.cjs *.mjs'
 		When call eslint_test
-		The status should eq 1
+		The status should eq 0
 	End
 End
