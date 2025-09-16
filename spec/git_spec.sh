@@ -26,7 +26,7 @@
 ##   * <Project homepage at https://github.com/qq542vev/sslk>
 ##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
-eval "$(shellspec - -c) exit 1"
+eval "$(shellspec -) exit 1"
 
 for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
 	[ -z "${SPECKIT_MODULE_LODAD+_}" ] || break
