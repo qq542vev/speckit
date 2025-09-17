@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe 'Test: *.html, *xhtml' speckit category:html
+Describe 'markuplint' speckit category:html
 	if [ -z "${SPECKIT_MARKUPLINLT_CMD+_}" ]; then
 		Skip if 'not exists markuplint' speckit_not_exists_all markuplint
 	fi
@@ -47,7 +47,7 @@ Describe 'Test: *.html, *xhtml' speckit category:html
 		speckit_find_file '${SPECKIT_MARKUPLINLT_CMD:-markuplint} ${SPECKIT_MARKUPLINLT_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
-	Example "markuplint *.html *.xhtml"
+	Example "*.html *.xhtml"
 		When call markuplint_test
 		The status should eq 0
 	End

@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe '*.mdファイルの検証' speckit category:markdown
+Describe 'markdownlint' speckit category:markdown
 	if [ -z "${SPECKIT_MARKDOWNLINT_CMD+_}" ]; then
 		Skip if 'not exists markdownlint' speckit_not_exists_all markdownlint
 	fi
@@ -47,7 +47,7 @@ Describe '*.mdファイルの検証' speckit category:markdown
 		speckit_find_file '${SPECKIT_MARKDOWNLINT_CMD:-markdownlint} ${SPECKIT_MARKDOWNLINT_ARGS-} -- "${@}"' '?*.md' '?*.markdown'
 	}
 
-	Example 'markdownlint *.md'
+	Example '*.md *.markdown'
 		When call markdownlint_test 
 		The status should eq 0
 	End

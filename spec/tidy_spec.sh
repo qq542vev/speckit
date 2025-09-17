@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe 'Test: *.html, *xhtml' speckit category:html
+Describe 'tidy' speckit category:html
 	if [ -z "${SPECKIT_TIDY_CMD+_}" ]; then
 		Skip if 'not exists tidy' speckit_not_exists_all tidy
 	fi
@@ -47,7 +47,7 @@ Describe 'Test: *.html, *xhtml' speckit category:html
 		speckit_find_file '${SPECKIT_TIDY_CMD:-tidy} -eq --show-filename yes ${SPECKIT_TIDY_ARGS-} -- "${@}"' '?*.html' '?*.xhtml'
 	}
 
-	Example "tidy -eq -- *.html *.xhtml"
+	Example "-eq --show-filename yes-- *.html *.xhtml"
 		When call tidy_test
 		The status should not eq 2
 	End

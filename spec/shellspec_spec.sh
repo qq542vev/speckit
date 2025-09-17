@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe '*_spec.shの検証' speckit category:shellspec
+Describe 'shellspec' speckit category:shellspec
 	if [ -z "${SPECKIT_SHELLSPEC_CMD+_}" ]; then
 		Skip if 'not exists shellspec' speckit_not_exists_all shellspec
 	fi
@@ -47,7 +47,7 @@ Describe '*_spec.shの検証' speckit category:shellspec
 		speckit_find_file '${SPECKIT_SHELLSPEC_CMD:-shellspec} --syntax-check ${SPECKIT_SHELLSPEC_ARGS-} -- "${@}" >/dev/null' '?*_spec.sh'
 	}
 
-	Example 'shellspec --syntax-check *_spec.sh'
+	Example '--syntax-check *_spec.sh'
 		When call shellspec_test
 		The status should eq 0
 	End

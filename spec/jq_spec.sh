@@ -55,7 +55,7 @@ Describe 'jq' speckit category:json
 		' '?*.json'
 	}
 
-	Example '*.json'
+	Example 'empty *.json'
 		When call jq_test
 		The status should eq 0
 	End

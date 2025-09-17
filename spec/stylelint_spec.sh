@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe '*.cssファイルの検証' speckit category:css
+Describe 'stylelint' speckit category:css
 	if [ -z "${SPECKIT_STYLELINT_CMD+_}" ]; then
 		Skip if 'not exists stylelint' speckit_not_exists_all stylelint
 	fi
@@ -47,7 +47,7 @@ Describe '*.cssファイルの検証' speckit category:css
 		speckit_find_file '${SPECKIT_STYLELINT_CMD:-stylelint} ${SPECKIT_STYLELINT_ARGS-} -- "${@}"' '?*.css'
 	}
 
-	Example 'stylelint *.css'
+	Example '*.css'
 		When call stylelint_test
 		The status should eq 0
 	End

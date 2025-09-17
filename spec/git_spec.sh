@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe '.gitの検証' speckit category:git
+Describe 'git' speckit category:git
 	if [ -z "${SPECKIT_GIT_CMD+_}" ]; then
 		Skip if 'not exists git' speckit_not_exists_all git
 	fi
@@ -55,17 +55,17 @@ Describe '.gitの検証' speckit category:git
 		' '.git'
 	}
     
-	Example 'git diff --cached --check'
+	Example 'diff --cached --check'
 		When call git_test diff --cached --check
 		The status should eq 0
 	End
 
-	Example 'git commit-graph verify'
+	Example 'commit-graph verify'
 		When call git_test commit-graph verify
 		The status should eq 0
 	End
 
-	Example 'git fsck --full --strict'
+	Example 'fsck --full --strict'
 		When call git_test fsck --full --strict --no-progress
 		The status should eq 0
 	End

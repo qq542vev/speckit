@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe 'Test: *.desktop' speckit category:desktop
+Describe 'desktop-file-validate' speckit category:desktop
 	if [ -z "${SPECKIT_DESKTOP_FILE_VALIDATE_CMD+_}" ]; then
 		Skip if 'not exists desktop-file-validate' speckit_not_exists_all desktop-file-validate
 	fi
@@ -47,7 +47,7 @@ Describe 'Test: *.desktop' speckit category:desktop
 		speckit_find_file '${SPECKIT_DESKTOP_FILE_VALIDATE_CMD:-desktop-file-validate} ${SPECKIT_DESKTOP_FILE_VALIDATE_ARGS-} -- "${@}"' '?*.desktop'
 	}
 
-	Example 'desktop-file-validate *.desktop'
+	Example '*.desktop'
 		When call desktopfilevalidate_test
 		The status should eq 0
 	End

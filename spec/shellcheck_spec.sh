@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe 'Test: *.sh' speckit category:shellscript
+Describe 'shellcheck' speckit category:shellscript
 	if [ -z "${SPECKIT_SHELLCHECK_CMD+_}" ]; then
 		Skip if 'not exists shellcheck' speckit_not_exists_all shellcheck
 	fi
@@ -47,7 +47,7 @@ Describe 'Test: *.sh' speckit category:shellscript
 		speckit_find_file '${SPECKIT_SHELLCHECK_CMD:-shellcheck} -f gcc -s sh ${SPECKIT_SHELLCHECK_ARGS-} -- "${@}"' '?*.sh'
 	}
 
-	Example 'shellcheck *.sh'
+	Example '-f gcc -s sh *.sh'
 		When call shellcheck_test
 		The status should eq 0
 	End
