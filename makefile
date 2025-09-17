@@ -18,7 +18,7 @@
 ##   created - 2025-09-16
 ##   modified - 2025-09-16
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
-##   license - <GNU GPLv3 at https://www.gnu.org/licenses/gpl-3.0.txt>
+##   license - <GPL-3.0-only at https://www.gnu.org/licenses/gpl-3.0.txt>
 ##   depends - find, jq 
 ##   conforms-to - <https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html>
 ##
@@ -42,7 +42,7 @@ all: package.json
 
 package.json: spec
 	find LICENSE.txt README.md spec -type f -exec jq -n --args '$$ARGS.positional[]' '{}' + | jq -s --slurpfile pkg ${@} '$$pkg[0] + {files: sort}' >${@}.new
-	mv -f $(@).new $(@)
+	mv -f -- $(@).new $(@)
 
 LICENSE.txt:
 	curl -sSfLo $(@) -- 'https://www.gnu.org/licenses/gpl-3.0.txt'
