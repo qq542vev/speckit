@@ -27,9 +27,9 @@
 ##   * <Project homepage at https://github.com/qq542vev/speckit>
 ##   * <Bag report at https://github.com/qq542vev/speckit/issues>
 
-eval "$(bashellspec -) exit 1"
+eval "$(shellspec -) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.bash" "${SHELLSPEC_SPECFILE}/../lib/speckit.bash"; do
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
 	[ -z "${SPECKIT_MODULE_LODAD+_}" ] || break
 
 	if [ -f "${inc}" ]; then
@@ -43,7 +43,7 @@ Describe 'bash' speckit category:shellscript
 	fi
 
 	bash_test() {
-		# bashellcheck disable=SC2016
+		# shellcheck disable=SC2016
 		speckit_find_file '
 			for file in "${@}"; do
 				${SPECKIT_BASH_CMD:-bash} -n ${SPECKIT_BASH_ARGS-} -- "${file}" || exit="${exit-${?}}"
@@ -55,6 +55,6 @@ Describe 'bash' speckit category:shellscript
 
 	Example '-n *.sh'
 		When call bash_test
-		The status bashould eq 0
+		The status should eq 0
 	End
 End
