@@ -1,2 +1,2 @@
 --no-warning-as-failure
---env SPECKIT_FIND_ARGS="! -path ./deps/*"
+--env SPECKIT_FIND_ARGS="! -path ./.git/* ! -path ./deps/*"
