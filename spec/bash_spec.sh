@@ -24,8 +24,8 @@
 ##
 ## See Also:
 ##
-##   * <Project homepage at https://github.com/qq542vev/sslk>
-##   * <Bag report at https://github.com/qq542vev/sslk/issues>
+##   * <Project homepage at https://github.com/qq542vev/speckit>
+##   * <Bag report at https://github.com/qq542vev/speckit/issues>
 
 eval "$(bashellspec -) exit 1"
 

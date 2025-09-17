@@ -24,8 +24,8 @@
 ##
 ## See Also:
 ##
-##   * <Project homepage at https://github.com/qq542vev/sslk>
-##   * <Bag report at https://github.com/qq542vev/sslk/issues>
+##   * <Project homepage at https://github.com/qq542vev/speckit>
+##   * <Bag report at https://github.com/qq542vev/speckit/issues>
 
 eval "$(shellspec -) exit 1"
 
@@ -37,7 +37,7 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe 'gmake' speckit category:json
+Describe 'gmake' speckit category:makefile
 	if [ -z "${SPECKIT_GMAKE_CMD+_}" ]; then
 		Skip if 'not exists gmake' speckit_not_exists_all gmake
 	fi
