@@ -20,6 +20,7 @@
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
 ##   license - <GPL-3.0-only at https://www.gnu.org/licenses/gpl-3.0.txt>
 ##   depends - git
+##   conforms-to - <https://github.com/shellspec/shellspec/blob/master/docs/references.md>
 ##
 ## See Also:
 ##
