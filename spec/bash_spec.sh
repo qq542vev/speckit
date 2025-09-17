@@ -1,13 +1,13 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-### File: sh_spec.sh
+### File: bash_spec.sh
 ##
-## shによる*.shファイルの検証。
+## bashによる*.shファイルの検証。
 ##
 ## Usage:
 ##
 ## ------ Text ------
-## shellspec sh_spec.sh
+## bashellspec bash_spec.bash
 ## ------------------
 ##
 ## Metadata:
@@ -19,17 +19,17 @@
 ##   modified - 2025-09-09
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
 ##   license - <GPL-3.0-only at https://www.gnu.org/licenses/gpl-3.0.txt>
-##   depends - sh
-##   conforms-to - <https://github.com/shellspec/shellspec/blob/master/docs/references.md>
+##   depends - bash
+##   conforms-to - <https://github.com/bashellspec/bashellspec/blob/master/docs/references.md>
 ##
 ## See Also:
 ##
 ##   * <Project homepage at https://github.com/qq542vev/sslk>
 ##   * <Bag report at https://github.com/qq542vev/sslk/issues>
 
-eval "$(shellspec -) exit 1"
+eval "$(bashellspec -) exit 1"
 
-for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
+for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.bash" "${SHELLSPEC_SPECFILE}/../lib/speckit.bash"; do
 	[ -z "${SPECKIT_MODULE_LODAD+_}" ] || break
 
 	if [ -f "${inc}" ]; then
@@ -37,24 +37,24 @@ for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib
 	fi
 done
 
-Describe 'Test: *.sh' speckit category:shellscript
-	if [ -z "${SPECKIT_SH_CMD+_}" ]; then
-		Skip if 'not exists sh' speckit_not_exists_all sh
+Describe 'bash' speckit category:shellscript
+	if [ -z "${SPECKIT_BASH_CMD+_}" ]; then
+		Skip if 'not exists bash' speckit_not_exists_all bash
 	fi
 
-	sh_test() {
-		# shellcheck disable=SC2016
+	bash_test() {
+		# bashellcheck disable=SC2016
 		speckit_find_file '
 			for file in "${@}"; do
-				${SPECKIT_SH_CMD:-sh} -n ${SPECKIT_SH_ARGS-} -- "${file}" || exit="${exit-${?}}"
+				${SPECKIT_BASH_CMD:-bash} -n ${SPECKIT_BASH_ARGS-} -- "${file}" || exit="${exit-${?}}"
 			done
 
 			exit "${exit-0}"
 		' '?*.sh'
 	}
 
-	Example 'sh -n *.sh'
-		When call sh_test
-		The status should eq 0
+	Example '-n *.sh'
+		When call bash_test
+		The status bashould eq 0
 	End
 End
