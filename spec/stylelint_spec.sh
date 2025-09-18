@@ -30,7 +30,7 @@
 eval "$(shellspec -) exit 0"
 
 for inc in "${SHELLSPEC_HELPERDIR}/lib/speckit.sh" "${SHELLSPEC_SPECFILE}/../lib/speckit.sh"; do
-	[ -z "${SPECKIT_MODULE_LODAD+_}" ] || break
+	[ -z "${SPECKIT_MODULE_LOADED+_}" ] || break
 
 	if [ -f "${inc}" ]; then
 		Include "${inc}"
