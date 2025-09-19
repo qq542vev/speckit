@@ -1,2 +1,3 @@
---no-warning-as-failure
+--require spec_helper
 --env SPECKIT_FIND_ARGS="! -path ./.git/* ! -path ./deps/*"
+--no-warning-as-failure
