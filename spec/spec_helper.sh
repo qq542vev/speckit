@@ -3,7 +3,7 @@
 # Defining variables and functions here will affect all specfiles.
 # Change shell options inside a function may cause different behavior,
 # so it is better to set them here.
-# set -eu
+set -eu
 
 # This callback function will be invoked only once before loading specfiles.
 spec_helper_precheck() {
@@ -21,4 +21,5 @@ spec_helper_loaded() {
 spec_helper_configure() {
   # Available functions: import, before_each, after_each, before_all, after_all
   : import 'support/custom_matcher'
+  # "${SHELLSPEC_HELPERDIR}/lib/speckit.sh"
 }
