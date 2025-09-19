@@ -25,8 +25,10 @@
 ##   * <Project homepage at https://github.com/qq542vev/speckit>
 ##   * <Bag report at https://github.com/qq542vev/speckit/issues>
 
-# shellcheck disable=SC2034
-readonly SPECKIT_MODULE_LOADED=1
+if [ -n "${SPECKIT_MODULE_LOADED+_}" ]; then
+	# shellcheck disable=SC2034
+	readonly SPECKIT_MODULE_LOADED=1
+fi
 
 speckit_find() (
 	# shellcheck disable=SC2016
