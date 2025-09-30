@@ -2,9 +2,18 @@
   "name": "speckit",
   "version": "0.1.0",
   "description": "様々な検証ツールをShellSpecから利用するためのツール。",
-  "global": false,
-  "dependencies-dev": {
-    "shellspec/shellspec": "0.28.1"
+  "keywords": [
+    "shellspec",
+    "test"
+  ],
+  "homepage": "https://github.com/qq542vev/speckit",
+  "bug": {
+    "url": "https://github.com/qq542vev/speckit/issues"
+  },
+  "license": "GPL-3.0-only",
+  "author": {
+    "name": "qq542vev",
+    "url": "https://purl.org/meta/me/"
   },
   "files": [
     "LICENSE.txt",
@@ -25,6 +34,10 @@
     "spec/stylelint_spec.sh",
     "spec/tidy_spec.sh"
   ],
+  "global": false,
+  "dependencies-dev": {
+    "shellspec/shellspec": "0.28.1"
+  },
   "commands": {
     "shellspec": "shellspec ${@}"
   }
