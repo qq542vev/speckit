@@ -1,6 +1,6 @@
 {
   "name": "speckit",
-  "version": "0.1.0",
+  "version": "0.2.0-dev",
   "description": "様々な検証ツールをShellSpecから利用するためのツール。",
   "keywords": [
     "shellspec",
@@ -32,7 +32,8 @@
     "spec/shellspec_spec.sh",
     "spec/spec_helper.sh",
     "spec/stylelint_spec.sh",
-    "spec/tidy_spec.sh"
+    "spec/tidy_spec.sh",
+    "spec/unmake_spec.sh"
   ],
   "global": false,
   "dependencies-dev": {
