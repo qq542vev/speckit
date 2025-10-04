@@ -16,7 +16,7 @@
 ##   author - <qq542vev at https://purl.org/meta/me/>
 ##   version - 0.0.1
 ##   created - 2025-09-16
-##   modified - 2025-09-16
+##   modified - 2025-10-04
 ##   copyright - Copyright (C) 2025-2025 qq542vev. All rights reserved.
 ##   license - <GPL-3.0-only at https://www.gnu.org/licenses/gpl-3.0.txt>
 ##   depends - find, jq 
@@ -41,7 +41,7 @@ VERSION = 0.0.1
 all: package.json
 
 package.json: spec
-	find LICENSE.txt README.md spec -type f -exec jq -n --args '$$ARGS.positional[]' '{}' + | jq -s --slurpfile pkg ${@} '$$pkg[0] + {files: sort}' >${@}.new
+	find LICENSE.txt README.md spec -type f -exec jq -n --args '$$ARGS.positional[]' '{}' + | jq -s --slurpfile pkg $(@) '$$pkg[0] + {files: sort}' >$(@).new
 	mv -f -- $(@).new $(@)
 
 LICENSE.txt:
